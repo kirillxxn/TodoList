@@ -1,0 +1,61 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.container-title {
+	margin: 0;
+	font-size: 10rem;
+}
+.container-subtitle {
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	margin: 0;
+	font-size: 4rem;
+	transform: translateY(-120px) translateX(150px);
+	color: rgba(172, 45, 45, 0.763);
+}
+.section-todolist {
+	width: 70%;
+	height: 50vh;
+	border: 1px rgba(255, 255, 255, 0.385) solid;
+	border-radius: 20px;
+	text-align: center;
+}
+.todolist-add-todo {
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	border-bottom: 1px rgba(255, 255, 255, 0.466) solid;
+}
+.todo-input {
+	width: 40%;
+	height: 25px;
+	transition: all 0.3s ease-in-out;
+}
+.todo-input::placeholder {
+	font-style: italic;
+	opacity: 0.5;
+	transition: all 0.3s ease-in-out;
+}
+.todo-input:hover::placeholder {
+	font-style: italic;
+	opacity: 0.1;
+}
+
+.todo-button {
+	background-color: white;
+	border-radius: 50px;
+	cursor: pointer;
+}
+.todo-button-icon {
+	width: 32px;
+	height: 32px;
+	transition: all 0.3s ease-in-out;
+}
+.todo-button-icon:hover {
+	transform: rotate(180deg);
+}
