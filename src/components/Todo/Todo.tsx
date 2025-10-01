@@ -1,6 +1,17 @@
 import styles from './Todo.module.css'
 import AddTodoIcon from '..//..//assets/icons/icon-add-todo.png'
+import { useToDoStore } from '../../data/stores/useToDoStore'
+import { useState } from 'react'
 const Todo = () => {
+	const { tasks, addTodo, removeTodo } = useToDoStore()
+	const [inputValue, setInputValue] = useState('')
+	const handleAddTodo = () => {
+		if (inputValue.trim()) {
+			addTodo(inputValue)
+			setInputValue('')
+		}
+	}
+
 	return (
 		<>
 			<div className={styles['container']}>
@@ -12,8 +23,10 @@ const Todo = () => {
 							className={styles['todo-input']}
 							type='text'
 							placeholder='Add todo'
+							value={inputValue}
+							onChange={e => setInputValue(e.target.value)}
 						/>
-						<button className={styles['todo-button']}>
+						<button onClick={handleAddTodo} className={styles['todo-button']}>
 							<img
 								className={styles['todo-button-icon']}
 								src={AddTodoIcon}
@@ -23,7 +36,13 @@ const Todo = () => {
 					</div>
 					<div className={styles['todolist']}>
 						<ul>
-							<li></li>
+							{tasks.map(item => (
+								<li key={item.id}>
+									<h3>{item.title}</h3>
+									<p>{item.createdAt}</p>
+									<button onClick={() => removeTodo(item.id)}>del</button>
+								</li>
+							))}
 						</ul>
 					</div>
 				</section>
