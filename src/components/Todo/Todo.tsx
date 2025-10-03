@@ -3,6 +3,8 @@ import AddTodoIcon from '..//..//assets/icons/icon-add-todo.png'
 import DeleteTodoIcon from '..//..//assets/icons/icon-delete-todo.png'
 import { useToDoStore } from '../../data/stores/useToDoStore'
 import { useState } from 'react'
+import { Flip, toast } from 'react-toastify'
+
 const Todo = () => {
 	const { tasks, addTodo, removeTodo } = useToDoStore()
 	const [inputValue, setInputValue] = useState('')
@@ -10,7 +12,32 @@ const Todo = () => {
 		if (inputValue.trim()) {
 			addTodo(inputValue)
 			setInputValue('')
+			toast.success('Добавлено', {
+				position: 'top-right',
+				autoClose: 1000,
+				hideProgressBar: false,
+				closeOnClick: false,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined,
+				theme: 'dark',
+				transition: Flip,
+			})
 		}
+	}
+	const handleDeleteTodo = (id: string) => {
+		removeTodo(id)
+		toast.info('Удалено', {
+			position: 'top-right',
+			autoClose: 1000,
+			hideProgressBar: false,
+			closeOnClick: false,
+			pauseOnHover: false,
+			draggable: true,
+			progress: undefined,
+			theme: 'dark',
+			transition: Flip,
+		})
 	}
 	const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {
@@ -59,7 +86,7 @@ const Todo = () => {
 									</p>
 									<button
 										className={styles['todo__item-btn-delete']}
-										onClick={() => removeTodo(item.id)}
+										onClick={() => handleDeleteTodo(item.id)}
 									>
 										<img
 											className={styles['btn__delete-icon']}

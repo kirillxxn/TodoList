@@ -108,7 +108,7 @@
 	cursor: pointer;
 }
 .todo__item:hover {
-	transform: translateY(-10px);
+	transform: translateY(-5px);
 }
 .todo__item:has(.todo__item-btn-delete:hover) {
 	opacity: 0.4;
