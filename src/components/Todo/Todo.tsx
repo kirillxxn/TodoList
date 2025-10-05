@@ -1,43 +1,44 @@
 import styles from './Todo.module.css'
 import AddTodoIcon from '..//..//assets/icons/icon-add-todo.png'
-import DeleteTodoIcon from '..//..//assets/icons/icon-delete-todo.png'
+import DeleteTodoIcon from '..//..//assets/icons/icon-delete-todo.svg'
+import DoneTodoIcon from '..//..//assets/icons/icon-done-todo.svg'
 import { useToDoStore } from '../../data/stores/useToDoStore'
 import { useState } from 'react'
-import { Flip, toast } from 'react-toastify'
+import { Flip, toast, type ToastTransition } from 'react-toastify'
 
 const Todo = () => {
-	const { tasks, addTodo, removeTodo } = useToDoStore()
+	const { tasks, addTodo, removeTodo, toggleTodo } = useToDoStore()
 	const [inputValue, setInputValue] = useState('')
+	type TToast = {
+		autoClose: number
+		hideProgressBar: boolean
+		closeOnClick: boolean
+		pauseOnHover: boolean
+		draggable: boolean
+		progress: undefined
+		theme: string
+		transition: ToastTransition
+	}
+	const toastConfig: TToast = {
+		autoClose: 1000,
+		hideProgressBar: false,
+		closeOnClick: false,
+		pauseOnHover: false,
+		draggable: true,
+		progress: undefined,
+		theme: 'dark',
+		transition: Flip,
+	}
 	const handleAddTodo = () => {
 		if (inputValue.trim()) {
 			addTodo(inputValue)
 			setInputValue('')
-			toast.success('Добавлено', {
-				position: 'top-right',
-				autoClose: 1000,
-				hideProgressBar: false,
-				closeOnClick: false,
-				pauseOnHover: false,
-				draggable: true,
-				progress: undefined,
-				theme: 'dark',
-				transition: Flip,
-			})
+			toast.success('Добавлено', toastConfig)
 		}
 	}
 	const handleDeleteTodo = (id: string) => {
 		removeTodo(id)
-		toast.info('Удалено', {
-			position: 'top-right',
-			autoClose: 1000,
-			hideProgressBar: false,
-			closeOnClick: false,
-			pauseOnHover: false,
-			draggable: true,
-			progress: undefined,
-			theme: 'dark',
-			transition: Flip,
-		})
+		toast.info('Удалено', toastConfig)
 	}
 	const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {
@@ -79,13 +80,46 @@ const Todo = () => {
 					<div className={styles['todo']}>
 						<ul className={styles['todo__list']}>
 							{tasks.map(item => (
-								<li className={styles['todo__item']} key={item.id}>
-									<h3 className={styles['todo__item-title']}>{item.title}</h3>
-									<p className={styles['todo__item-word']}>
-										{formatDate(item.createdAt)}
-									</p>
+								<li
+									className={`${styles['todo__item']} ${
+										styles[item.completed ? 'completed' : 'uncompleted']
+									}`}
+									key={item.id}
+								>
 									<button
-										className={styles['todo__item-btn-delete']}
+										className={`${styles['item__btn']} ${
+											styles[
+												item.completed
+													? 'btn__done-completed'
+													: 'todo__item-btn-done'
+											]
+										}`}
+										onClick={() => toggleTodo(item.id)}
+									>
+										<img
+											className={styles['btn__done-icon']}
+											src={DoneTodoIcon}
+											alt='Иконка выполненной задачи'
+										/>
+									</button>
+									<div className={styles['todo__item-word-container']}>
+										<h3
+											className={`${styles['word__container-title']} ${
+												styles[item.completed ? 'title-completed' : '']
+											}`}
+										>
+											{item.title}
+										</h3>
+										<p className={styles['word__container-date']}>
+											{item.completed
+												? `Выполнено ${
+														item.completedAt ? formatDate(item.completedAt) : ''
+												  }`
+												: `Дата добавления: ${formatDate(item.createdAt)}`}
+										</p>
+									</div>
+									<button
+										className={`${styles['item__btn']} ${styles['todo__item-btn-delete']}`}
 										onClick={() => handleDeleteTodo(item.id)}
 									>
 										<img

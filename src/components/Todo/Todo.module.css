@@ -82,40 +82,89 @@
 	padding: 10px;
 }
 .todo__item {
-	background-color: white;
-	color: black;
 	position: relative;
 	border-radius: 20px;
-	padding: 30px;
 	transition: all 0.3s ease-in-out;
 }
-.todo__item-title {
+.uncompleted {
+	background-color: white;
+	color: black;
+}
+.completed {
+	background-color: green;
+	color: black;
+}
+.todo__item-word-container {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	padding: 50px 20px 20px 20px;
+	gap: 10px;
+}
+.word__container-title {
 	margin: 0;
 	font-size: 1rem;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
-.todo__item-word {
+.title-completed {
+	text-decoration: line-through;
+	opacity: 0.6;
+}
+.word__container-date {
 	margin: 0;
 }
-.todo__item-btn-delete {
+
+.item__btn {
 	background-color: transparent;
 	border: none;
 	position: absolute;
+	cursor: pointer;
+}
+.todo__item-btn-done {
+	top: 10px;
+	left: 10px;
+}
+.btn__done-completed {
+	display: none;
+}
+.btn__done-icon {
+	width: 20px;
+	padding: 5px;
+	background-color: green;
+	border-radius: 20px;
+}
+.todo__item-btn-delete {
 	top: 10px;
 	right: 10px;
-	cursor: pointer;
+}
+.btn__delete-icon {
+	width: 20px;
+	padding: 5px;
+	background-color: rgb(121, 31, 31);
+	border-radius: 20px;
 }
 .todo__item:hover {
 	transform: translateY(-5px);
 }
 .todo__item:has(.todo__item-btn-delete:hover) {
 	opacity: 0.4;
+	background-color: rgb(121, 31, 31);
 }
 .btn__delete-icon {
 	transition: all 0.3s ease-in-out;
 }
 .btn__delete-icon:hover {
+	scale: 1.2;
+}
+.todo__item:has(.todo__item-btn-done:hover) {
+	opacity: 0.4;
+	background-color: green;
+}
+.btn__done-icon {
+	transition: all 0.3s ease-in-out;
+}
+.btn__done-icon:hover {
 	scale: 1.2;
 }
