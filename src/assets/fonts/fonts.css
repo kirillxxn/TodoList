@@ -1,0 +1,12 @@
+@font-face {
+	font-family: 'Permanent';
+	src: url('./PermanentMarker-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Mochiy';
+	src: url('./MochiyPopOne-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}

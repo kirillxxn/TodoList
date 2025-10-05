@@ -1,5 +1,6 @@
 import styles from './Todo.module.css'
-import AddTodoIcon from '..//..//assets/icons/icon-add-todo.png'
+import '..//..//assets/fonts/fonts.css'
+import AddTodoIcon from '..//..//assets/icons/icon-add-todo.svg'
 import DeleteTodoIcon from '..//..//assets/icons/icon-delete-todo.svg'
 import DoneTodoIcon from '..//..//assets/icons/icon-done-todo.svg'
 import { useToDoStore } from '../../data/stores/useToDoStore'
@@ -57,7 +58,7 @@ const Todo = () => {
 	return (
 		<>
 			<div className={styles['container']}>
-				<h1 className={styles['container-title']}>Todo</h1>
+				<h1 className={styles['container-title']}>ToDo</h1>
 				<h2 className={styles['container-subtitle']}>list</h2>
 				<section className={styles['section-todolist']}>
 					<div className={styles['todolist-add-todo']}>
