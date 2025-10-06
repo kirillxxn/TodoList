@@ -118,6 +118,7 @@
 	display: flex;
 	padding: 50px 10px 20px 10px;
 	flex-wrap: nowrap;
+	align-items: center;
 }
 .word__container-btn-modal {
 	background-color: transparent;
@@ -128,6 +129,9 @@
 	text-overflow: ellipsis;
 	gap: 10px;
 	cursor: pointer;
+	width: 100%;
+	color: black;
+	align-items: center;
 }
 .word__container-title {
 	margin: 0;
@@ -135,6 +139,7 @@
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	max-width: 100%;
 }
 .title-completed {
 	margin: 0;
@@ -144,10 +149,12 @@
 	text-overflow: ellipsis;
 	text-decoration: line-through;
 	opacity: 0.6;
+	max-width: 100%;
 }
 .word__container-date {
 	margin: 0;
 	font-size: 1rem;
+	max-width: 100%;
 }
 
 .item__btn {
@@ -161,7 +168,8 @@
 	left: 10px;
 }
 .btn__done-completed {
-	display: none;
+	top: 10px;
+	left: 10px;
 }
 .btn__done-icon {
 	width: 20px;
@@ -208,4 +216,16 @@
 }
 .btn__done-icon:active {
 	scale: 1.2;
+}
+@media (max-width: 1200px) {
+	.section-todolist {
+		width: 70%;
+		height: 70vh;
+	}
+}
+
+@media (max-width: 768px) {
+	.section-todolist {
+		width: 90%;
+	}
 }
