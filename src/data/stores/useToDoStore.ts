@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { generateId } from '../GenId'
 import { persist } from 'zustand/middleware'
-type Task = {
+export type Task = {
 	id: string
 	title: string
 	createdAt: Date
@@ -9,7 +9,7 @@ type Task = {
 	completedAt?: Date | null
 }
 
-type TTodoList = {
+export type TTodoList = {
 	tasks: Task[]
 	addTodo: (title: string) => void
 	removeTodo: (id: string) => void
