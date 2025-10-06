@@ -74,6 +74,15 @@
 .btn__close-icon {
 	width: 24px;
 	height: 24px;
+	transition: all 0.3s ease-in-out;
+}
+
+.btn__close-icon:hover {
+	scale: 1.2;
+	transform: rotate(180deg);
+}
+.btn__close-icon:active {
+	scale: 1.2;
 }
 .modal__container {
 	display: flex;
