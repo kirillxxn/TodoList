@@ -4,10 +4,12 @@ import AddTodoIcon from '..//..//assets/icons/icon-add-todo.svg'
 import DeleteTodoIcon from '..//..//assets/icons/icon-delete-todo.svg'
 import DoneTodoIcon from '..//..//assets/icons/icon-done-todo.svg'
 import { useToDoStore } from '../../data/stores/useToDoStore'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Flip, toast, type ToastTransition } from 'react-toastify'
-
+import Modal from '../Modal/Modal'
+import type { TModal } from '../Modal/TypeModal'
 const Todo = () => {
+	const modalRef = useRef<TModal>(null)
 	const { tasks, addTodo, removeTodo, toggleTodo } = useToDoStore()
 	const [inputValue, setInputValue] = useState('')
 	type TToast = {
@@ -104,20 +106,35 @@ const Todo = () => {
 										/>
 									</button>
 									<div className={styles['todo__item-word-container']}>
-										<h3
-											className={`${styles['word__container-title']} ${
-												styles[item.completed ? 'title-completed' : '']
-											}`}
+										<button
+											onClick={() =>
+												modalRef.current?.openModal(
+													item.title,
+													item.completedAt || null,
+													item.createdAt
+												)
+											}
+											aria-label='Открыть задачу'
+											className={styles['word__container-btn-modal']}
 										>
-											{item.title}
-										</h3>
-										<p className={styles['word__container-date']}>
-											{item.completed
-												? `Выполнено ${
-														item.completedAt ? formatDate(item.completedAt) : ''
-												  }`
-												: `Дата добавления: ${formatDate(item.createdAt)}`}
-										</p>
+											<h3
+												title='Посмотреть полностью'
+												className={`${styles['word__container-title']} ${
+													styles[item.completed ? 'title-completed' : '']
+												}`}
+											>
+												{item.title}
+											</h3>
+											<p className={styles['word__container-date']}>
+												{item.completed
+													? `Выполнено ${
+															item.completedAt
+																? formatDate(item.completedAt)
+																: ''
+													  }`
+													: `Дата добавления: ${formatDate(item.createdAt)}`}
+											</p>
+										</button>
 									</div>
 									<button
 										className={`${styles['item__btn']} ${styles['todo__item-btn-delete']}`}
@@ -135,6 +152,7 @@ const Todo = () => {
 					</div>
 				</section>
 			</div>
+			<Modal ref={modalRef} />
 		</>
 	)
 }

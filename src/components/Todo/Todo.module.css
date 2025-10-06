@@ -116,10 +116,18 @@
 }
 .todo__item-word-container {
 	display: flex;
-	flex-direction: column;
+	padding: 50px 10px 20px 10px;
 	flex-wrap: nowrap;
-	padding: 50px 20px 20px 20px;
+}
+.word__container-btn-modal {
+	background-color: transparent;
+	border: none;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	gap: 10px;
+	cursor: pointer;
 }
 .word__container-title {
 	margin: 0;
@@ -130,7 +138,7 @@
 }
 .title-completed {
 	margin: 0;
-	font-size: 1.1rem;
+	font-size: 1.2rem;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -139,6 +147,7 @@
 }
 .word__container-date {
 	margin: 0;
+	font-size: 1rem;
 }
 
 .item__btn {
@@ -164,6 +173,7 @@
 	top: 10px;
 	right: 10px;
 }
+
 .btn__delete-icon {
 	width: 20px;
 	padding: 5px;

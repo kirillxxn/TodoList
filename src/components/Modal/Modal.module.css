@@ -1,0 +1,133 @@
+.modal__overlay {
+	background-color: rgba(0, 0, 0, 0.7);
+	position: fixed;
+	inset: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 300ms ease-in-out;
+	pointer-events: none;
+	z-index: 1000;
+}
+
+.modal__overlay--active {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.modal__overlay--closing {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.modal__content {
+	background: #f1e3c2;
+	width: 50vh;
+	height: 35vh;
+	padding: 30px;
+	border-radius: 16px;
+	transform: scale(0.95) translateY(20px);
+	opacity: 0;
+	transition: all 300ms ease-in-out;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.modal__content--active {
+	transform: scale(1) translateY(0);
+	opacity: 1;
+}
+
+.modal__content--closing {
+	transform: scale(0.95) translateY(20px);
+	opacity: 0;
+}
+
+.modal__content::-webkit-scrollbar {
+	width: 8px;
+}
+
+.modal__content::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	border-radius: 4px;
+}
+
+.modal__content::-webkit-scrollbar-thumb {
+	background: #c1c1c1;
+	border-radius: 4px;
+}
+
+.modal__content::-webkit-scrollbar-thumb:hover {
+	background: #a8a8a8;
+}
+.modal__btn-close {
+	position: absolute;
+	top: 20px;
+	right: 10px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+.btn__close-icon {
+	width: 24px;
+	height: 24px;
+}
+.modal__container {
+	border: 1px red solid;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+	gap: 50px;
+}
+.container-title {
+	font-size: 1.5rem;
+	margin: 0;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	hyphens: auto;
+}
+.container-date {
+	margin: 0;
+}
+@media (max-width: 1200px) {
+	.modal__content {
+		width: 50vh;
+		height: 60vh;
+		margin: 20px;
+	}
+}
+
+@media (max-width: 768px) {
+	.modal__content {
+		width: 95%;
+		height: 75vh;
+		margin: 10px;
+		border-radius: 12px;
+	}
+}
+
+@media (max-width: 480px) {
+	.modal__content {
+		width: 50%;
+		height: 50%;
+		margin: 0;
+		border-radius: 10px;
+		max-height: none;
+	}
+
+	.modal__overlay {
+		background-color: rgba(0, 0, 0, 0.9);
+	}
+}
+
+body.modal-open {
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
