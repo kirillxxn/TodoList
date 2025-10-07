@@ -7,11 +7,17 @@ export type Task = {
 	createdAt: Date
 	completed: boolean
 	completedAt?: Date | null
+	deadlineDate?: Date | string | null
+	deadlineTime?: Date | string | null
 }
 
 export type TTodoList = {
 	tasks: Task[]
-	addTodo: (title: string) => void
+	addTodo: (
+		title: string,
+		deadlineDate?: Date | string | null,
+		deadlineTime?: Date | string | null
+	) => void
 	removeTodo: (id: string) => void
 	toggleTodo: (id: string) => void
 }
@@ -20,7 +26,7 @@ export const useToDoStore = create<TTodoList>()(
 	persist(
 		(set, get) => ({
 			tasks: [],
-			addTodo: title => {
+			addTodo: (title, deadlineDate, deadlineTime) => {
 				const { tasks } = get()
 				const formattedTitle =
 					title.trim().charAt(0).toUpperCase() +
@@ -32,6 +38,8 @@ export const useToDoStore = create<TTodoList>()(
 					createdAt: new Date(),
 					completed: false,
 					completedAt: null,
+					deadlineDate: deadlineDate || null,
+					deadlineTime: deadlineTime || null,
 				}
 				set({
 					tasks: [newTask, ...tasks],

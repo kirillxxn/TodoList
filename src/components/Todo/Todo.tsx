@@ -12,6 +12,8 @@ const Todo = () => {
 	const modalRef = useRef<TModal>(null)
 	const { tasks, addTodo, removeTodo, toggleTodo } = useToDoStore()
 	const [inputValue, setInputValue] = useState('')
+	const [inputDateValue, setInputDateValue] = useState('')
+	const [inputTimeValue, setInputTimeValue] = useState('')
 	type TToast = {
 		autoClose: number
 		hideProgressBar: boolean
@@ -34,7 +36,7 @@ const Todo = () => {
 	}
 	const handleAddTodo = () => {
 		if (inputValue.trim()) {
-			addTodo(inputValue)
+			addTodo(inputValue, inputDateValue, inputTimeValue)
 			setInputValue('')
 			toast.success('Добавлено', toastConfig)
 		}
@@ -57,6 +59,19 @@ const Todo = () => {
 			minute: '2-digit',
 		})
 	}
+	const formatDateNoTime = (date: Date | string) => {
+		return new Date(date).toLocaleDateString('ru-RU', {
+			day: '2-digit',
+			month: '2-digit',
+			year: 'numeric',
+		})
+	}
+	const sortTasks = tasks.sort((a, b) => {
+		if (a.completed === b.completed) {
+			return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+		}
+		return a.completed ? 1 : -1
+	})
 	return (
 		<>
 			<div className={styles['container']}>
@@ -72,6 +87,20 @@ const Todo = () => {
 							onChange={e => setInputValue(e.target.value)}
 							onKeyDown={handleEnterPress}
 						/>
+						<label htmlFor='date'>Выполнить до</label>
+						<input
+							className={styles['todo-input-date']}
+							type='date'
+							name='date'
+							value={inputDateValue}
+							id='date'
+							onChange={e => setInputDateValue(e.target.value)}
+						/>
+						<input
+							type='time'
+							value={inputTimeValue}
+							onChange={e => setInputTimeValue(e.target.value)}
+						/>
 						<button onClick={handleAddTodo} className={styles['todo-button']}>
 							<img
 								className={styles['todo-button-icon']}
@@ -82,7 +111,7 @@ const Todo = () => {
 					</div>
 					<div className={styles['todo']}>
 						<ul className={styles['todo__list']}>
-							{tasks.map(item => (
+							{sortTasks.map(item => (
 								<li
 									className={`${styles['todo__item']} ${
 										styles[item.completed ? 'completed' : 'uncompleted']
@@ -125,6 +154,19 @@ const Todo = () => {
 											>
 												{item.title}
 											</h3>
+											{item.deadlineDate && (
+												<p
+													className={`${styles['word-container-deadline']} ${
+														styles[item.completed ? 'deadline-done' : '']
+													}`}
+												>
+													Выполнить до: {''}
+													<span className={styles['container__deadline-word']}>
+														{formatDateNoTime(item.deadlineDate)}
+														{item.deadlineTime && ` в ${item.deadlineTime}`}
+													</span>
+												</p>
+											)}
 											<p className={styles['word__container-date']}>
 												{item.completed
 													? `Выполнено ${

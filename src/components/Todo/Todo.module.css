@@ -25,7 +25,7 @@
 }
 .section-todolist {
 	width: 70%;
-	min-height: 500px;
+	min-height: 80vh;
 	border-radius: 20px;
 	text-align: center;
 	background-color: #f1e3c2;
@@ -62,7 +62,10 @@
 .todo-input:focus-visible {
 	outline: none;
 }
-
+.todo-input-date {
+	color: black;
+	padding: 5px 10px;
+}
 .todo-button {
 	background-color: #20383c;
 	border: none;
@@ -107,7 +110,7 @@
 	border: 1px #20383c solid;
 }
 .uncompleted {
-	background-color: #cec38e;
+	background-color: #e4e3df;
 	color: black;
 }
 .completed {
@@ -135,7 +138,7 @@
 }
 .word__container-title {
 	margin: 0;
-	font-size: 1.2rem;
+	font-size: 1.5rem;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -143,7 +146,7 @@
 }
 .title-completed {
 	margin: 0;
-	font-size: 1.2rem;
+	font-size: 1.3rem;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -151,10 +154,23 @@
 	opacity: 0.6;
 	max-width: 100%;
 }
+.word-container-deadline {
+	font-size: 1rem;
+	color: black;
+	border-bottom: 1px black solid;
+}
+.container__deadline-word {
+	font-style: italic;
+	color: rgb(121, 31, 31);
+}
+.deadline-done {
+	display: none;
+}
 .word__container-date {
 	margin: 0;
-	font-size: 1rem;
+	font-size: 0.9rem;
 	max-width: 100%;
+	font-style: italic;
 }
 
 .item__btn {
