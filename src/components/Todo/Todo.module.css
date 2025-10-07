@@ -110,6 +110,13 @@
 	height: 100%;
 	padding: 20px;
 }
+.todo__empty {
+	margin-top: 100px;
+}
+.todo__empty-text {
+	color: #20383c69;
+	font-size: 2rem;
+}
 .todo__list {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

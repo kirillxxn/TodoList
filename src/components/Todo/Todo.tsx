@@ -95,87 +95,95 @@ const Todo = () => {
 						</div>
 					</div>
 					<div className={styles['todo']}>
-						<ul className={styles['todo__list']}>
-							{sortTasks.map(item => (
-								<li
-									className={`${styles['todo__item']} ${
-										styles[item.completed ? 'completed' : 'uncompleted']
-									}`}
-									key={item.id}
-								>
-									<button
-										className={`${styles['item__btn']} ${
-											styles[
-												item.completed
-													? 'btn__done-completed'
-													: 'todo__item-btn-done'
-											]
+						{tasks.length === 0 ? (
+							<div className={styles['todo__empty']}>
+								<span className={styles['todo__empty-text']}>Нет задач</span>
+							</div>
+						) : (
+							<ul className={styles['todo__list']}>
+								{sortTasks.map(item => (
+									<li
+										className={`${styles['todo__item']} ${
+											styles[item.completed ? 'completed' : 'uncompleted']
 										}`}
-										onClick={() => toggleTodo(item.id)}
+										key={item.id}
 									>
-										<img
-											className={styles['btn__done-icon']}
-											src={DoneTodoIcon}
-											alt='Иконка выполненной задачи'
-										/>
-									</button>
-									<div className={styles['todo__item-word-container']}>
 										<button
-											onClick={() =>
-												modalRef.current?.openModal(
-													item.title,
-													item.completedAt || null,
-													item.createdAt
-												)
-											}
-											aria-label='Открыть задачу'
-											className={styles['word__container-btn-modal']}
+											className={`${styles['item__btn']} ${
+												styles[
+													item.completed
+														? 'btn__done-completed'
+														: 'todo__item-btn-done'
+												]
+											}`}
+											onClick={() => toggleTodo(item.id)}
 										>
-											<h3
-												title='Посмотреть полностью'
-												className={`${styles['word__container-title']} ${
-													styles[item.completed ? 'title-completed' : '']
-												}`}
+											<img
+												className={styles['btn__done-icon']}
+												src={DoneTodoIcon}
+												alt='Иконка выполненной задачи'
+											/>
+										</button>
+										<div className={styles['todo__item-word-container']}>
+											<button
+												onClick={() =>
+													modalRef.current?.openModal(
+														item.title,
+														item.completedAt || null,
+														item.createdAt
+													)
+												}
+												aria-label='Открыть задачу'
+												className={styles['word__container-btn-modal']}
 											>
-												{item.title}
-											</h3>
-											{item.deadlineDate && (
-												<p
-													className={`${styles['word-container-deadline']} ${
-														styles[item.completed ? 'deadline-done' : '']
+												<h3
+													title='Посмотреть полностью'
+													className={`${styles['word__container-title']} ${
+														styles[item.completed ? 'title-completed' : '']
 													}`}
 												>
-													Выполнить до: {''}
-													<span className={styles['container__deadline-word']}>
-														{formatDateNoTime(item.deadlineDate)}
-														{item.deadlineTime && ` в ${item.deadlineTime}`}
-													</span>
+													{item.title}
+												</h3>
+												{item.deadlineDate && (
+													<p
+														className={`${styles['word-container-deadline']} ${
+															styles[item.completed ? 'deadline-done' : '']
+														}`}
+													>
+														Выполнить до: {''}
+														<span
+															className={styles['container__deadline-word']}
+														>
+															{formatDateNoTime(item.deadlineDate)}
+															{item.deadlineTime && ` в ${item.deadlineTime}`}
+														</span>
+													</p>
+												)}
+												<p className={styles['word__container-date']}>
+													{item.completed
+														? `Выполнено ${
+																item.completedAt
+																	? formatDate(item.completedAt)
+																	: ''
+														  }`
+														: `Дата добавления: ${formatDate(item.createdAt)}`}
 												</p>
-											)}
-											<p className={styles['word__container-date']}>
-												{item.completed
-													? `Выполнено ${
-															item.completedAt
-																? formatDate(item.completedAt)
-																: ''
-													  }`
-													: `Дата добавления: ${formatDate(item.createdAt)}`}
-											</p>
+											</button>
+										</div>
+										<button
+											className={`${styles['item__btn']} ${styles['todo__item-btn-delete']}`}
+											onClick={() => handleDeleteTodo(item.id)}
+										>
+											<img
+												className={styles['btn__delete-icon']}
+												src={DeleteTodoIcon}
+												alt='Иконка удаления задачи'
+											/>
 										</button>
-									</div>
-									<button
-										className={`${styles['item__btn']} ${styles['todo__item-btn-delete']}`}
-										onClick={() => handleDeleteTodo(item.id)}
-									>
-										<img
-											className={styles['btn__delete-icon']}
-											src={DeleteTodoIcon}
-											alt='Иконка удаления задачи'
-										/>
-									</button>
-								</li>
-							))}
-						</ul>
+									</li>
+								))}
+							</ul>
+						)}
 					</div>
 				</section>
 			</div>

@@ -3,6 +3,7 @@ import modalStyles from './Modal.module.css'
 import type { TModal } from './TypeModal'
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import closeModalBtn from '..//..//assets/icons/icon-close-modal.svg'
+import { formatDateText } from '../../utils/config/formatDate'
 const Modal = forwardRef<TModal>((_, ref) => {
 	const [isClosing, setIsClosing] = useState(false)
 	const [isOpening, setIsOpening] = useState(false)
@@ -10,16 +11,6 @@ const Modal = forwardRef<TModal>((_, ref) => {
 	const [modalTitle, setModalTitle] = useState('')
 	const [modalDate, setModalDate] = useState<Date | null>(null)
 	const [modalTextData, setModalTextData] = useState('')
-	const formatDate = (date: Date | null) => {
-		if (!date) return ''
-		return new Date(date).toLocaleString('ru-RU', {
-			day: '2-digit',
-			month: '2-digit',
-			year: 'numeric',
-			hour: '2-digit',
-			minute: '2-digit',
-		})
-	}
 
 	useEffect(() => {
 		if (modalIsOpen) {
@@ -103,7 +94,7 @@ ${isClosing ? modalStyles['modal__content--closing'] : ''}
 					<img
 						className={modalStyles['btn__close-icon']}
 						src={closeModalBtn}
-						alt=''
+						alt='Иконка закрытия окна'
 					/>
 				</button>
 				<div className={modalStyles['modal__container']}>
@@ -111,7 +102,7 @@ ${isClosing ? modalStyles['modal__content--closing'] : ''}
 					{modalDate && (
 						<p
 							className={modalStyles['container-date']}
-						>{`${modalTextData} ${formatDate(modalDate)}`}</p>
+						>{`${modalTextData} ${formatDateText(modalDate)}`}</p>
 					)}
 				</div>
 			</ReactModal>
