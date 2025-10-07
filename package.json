@@ -13,6 +13,7 @@
 	},
 	"homepage": "https://kirillxxn.github.io/TodoList",
 	"dependencies": {
+		"framer-motion": "^12.23.22",
 		"react": "^19.1.1",
 		"react-dom": "^19.1.1",
 		"react-hot-toast": "^2.6.0",

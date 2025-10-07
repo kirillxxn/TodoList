@@ -5,38 +5,30 @@ import DeleteTodoIcon from '..//..//assets/icons/icon-delete-todo.svg'
 import DoneTodoIcon from '..//..//assets/icons/icon-done-todo.svg'
 import { useToDoStore } from '../../data/stores/useToDoStore'
 import { useRef, useState } from 'react'
-import { Flip, toast, type ToastTransition } from 'react-toastify'
+import { toast } from 'react-toastify'
 import Modal from '../Modal/Modal'
 import type { TModal } from '../Modal/TypeModal'
+import { toastConfig } from '../../utils/config/toast'
+import { formatDate, formatDateNoTime } from '../../utils/config/formatDate'
+
 const Todo = () => {
+	/* Рефы */
 	const modalRef = useRef<TModal>(null)
+
+	/* Store */
 	const { tasks, addTodo, removeTodo, toggleTodo } = useToDoStore()
+
+	/* Состояния */
 	const [inputValue, setInputValue] = useState('')
 	const [inputDateValue, setInputDateValue] = useState('')
 	const [inputTimeValue, setInputTimeValue] = useState('')
-	type TToast = {
-		autoClose: number
-		hideProgressBar: boolean
-		closeOnClick: boolean
-		pauseOnHover: boolean
-		draggable: boolean
-		progress: undefined
-		theme: string
-		transition: ToastTransition
-	}
-	const toastConfig: TToast = {
-		autoClose: 1000,
-		hideProgressBar: false,
-		closeOnClick: false,
-		pauseOnHover: false,
-		draggable: true,
-		progress: undefined,
-		theme: 'dark',
-		transition: Flip,
-	}
+
+	/* Функции Todo */
 	const handleAddTodo = () => {
 		if (inputValue.trim()) {
 			addTodo(inputValue, inputDateValue, inputTimeValue)
+			setInputDateValue('')
+			setInputTimeValue('')
 			setInputValue('')
 			toast.success('Добавлено', toastConfig)
 		}
@@ -50,28 +42,16 @@ const Todo = () => {
 			handleAddTodo()
 		}
 	}
-	const formatDate = (date: Date) => {
-		return new Date(date).toLocaleString('ru-RU', {
-			day: '2-digit',
-			month: '2-digit',
-			year: 'numeric',
-			hour: '2-digit',
-			minute: '2-digit',
-		})
-	}
-	const formatDateNoTime = (date: Date | string) => {
-		return new Date(date).toLocaleDateString('ru-RU', {
-			day: '2-digit',
-			month: '2-digit',
-			year: 'numeric',
-		})
-	}
+
+	/* Сортировка задач */
 	const sortTasks = tasks.sort((a, b) => {
 		if (a.completed === b.completed) {
 			return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
 		}
 		return a.completed ? 1 : -1
 	})
+
+	/* Контент */
 	return (
 		<>
 			<div className={styles['container']}>
@@ -79,35 +59,40 @@ const Todo = () => {
 				<h2 className={styles['container-subtitle']}>list</h2>
 				<section className={styles['section-todolist']}>
 					<div className={styles['todolist-add-todo']}>
-						<input
-							className={styles['todo-input']}
-							type='text'
-							placeholder='Add todo'
-							value={inputValue}
-							onChange={e => setInputValue(e.target.value)}
-							onKeyDown={handleEnterPress}
-						/>
-						<label htmlFor='date'>Выполнить до</label>
-						<input
-							className={styles['todo-input-date']}
-							type='date'
-							name='date'
-							value={inputDateValue}
-							id='date'
-							onChange={e => setInputDateValue(e.target.value)}
-						/>
-						<input
-							type='time'
-							value={inputTimeValue}
-							onChange={e => setInputTimeValue(e.target.value)}
-						/>
-						<button onClick={handleAddTodo} className={styles['todo-button']}>
-							<img
-								className={styles['todo-button-icon']}
-								src={AddTodoIcon}
-								alt='Иконка добавления задачи'
+						<div className={styles['add__todo-input-btn']}>
+							<input
+								className={styles['todo-input']}
+								type='text'
+								placeholder='Add todo'
+								value={inputValue}
+								onChange={e => setInputValue(e.target.value)}
+								onKeyDown={handleEnterPress}
 							/>
-						</button>
+							<button onClick={handleAddTodo} className={styles['todo-button']}>
+								<img
+									className={styles['todo-button-icon']}
+									src={AddTodoIcon}
+									alt='Иконка добавления задачи'
+								/>
+							</button>
+						</div>
+						<div className={styles['add__todo_date-container']}>
+							<label htmlFor='date'>Выполнить до:</label>
+							<input
+								className={styles['todo-input-date']}
+								type='date'
+								name='date'
+								value={inputDateValue}
+								id='date'
+								onChange={e => setInputDateValue(e.target.value)}
+							/>
+							<input
+								className={styles['todo-input-date']}
+								type='time'
+								value={inputTimeValue}
+								onChange={e => setInputTimeValue(e.target.value)}
+							/>
+						</div>
 					</div>
 					<div className={styles['todo']}>
 						<ul className={styles['todo__list']}>
@@ -185,7 +170,7 @@ const Todo = () => {
 										<img
 											className={styles['btn__delete-icon']}
 											src={DeleteTodoIcon}
-											alt=''
+											alt='Иконка удаления задачи'
 										/>
 									</button>
 								</li>
