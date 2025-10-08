@@ -3,14 +3,16 @@ import modalStyles from './Modal.module.css'
 import type { TModal } from './TypeModal'
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import closeModalBtn from '..//..//assets/icons/icon-close-modal.svg'
-import { formatDateText } from '../../utils/config/formatDate'
+import { formatDateText, formatDate } from '../../utils/config/formatDate'
 const Modal = forwardRef<TModal>((_, ref) => {
 	const [isClosing, setIsClosing] = useState(false)
 	const [isOpening, setIsOpening] = useState(false)
 	const [modalIsOpen, setModalIsOpen] = useState(false)
 	const [modalTitle, setModalTitle] = useState('')
 	const [modalDate, setModalDate] = useState<Date | null>(null)
+	const [modalDeadline, setModalDeadline] = useState<string | null>('')
 	const [modalTextData, setModalTextData] = useState('')
+	const [modalTextDeadline, setModalTextDeadline] = useState('')
 
 	useEffect(() => {
 		if (modalIsOpen) {
@@ -40,7 +42,9 @@ const Modal = forwardRef<TModal>((_, ref) => {
 	const openModal = (
 		title?: string,
 		completedAt?: Date | null,
-		createdAt?: Date | null
+		createdAt?: Date | null,
+		deadlineDate?: string | null,
+		deadlineTime?: string | null
 	) => {
 		if (title) setModalTitle(title)
 		if (completedAt) {
@@ -52,13 +56,23 @@ const Modal = forwardRef<TModal>((_, ref) => {
 		} else {
 			setModalDate(null)
 		}
+		if (deadlineDate) {
+			let deadlineString = deadlineDate
+			if (deadlineTime) {
+				deadlineString = `${deadlineDate} ${deadlineTime}`
+			}
+			setModalDeadline(deadlineString)
+			setModalTextDeadline('Выполнить до:')
+		} else {
+			setModalDeadline(null)
+			setModalTextDeadline('')
+		}
+
 		document.body.style.overflow = 'hidden'
 		setModalIsOpen(true)
 		setIsClosing(false)
 	}
-	{
-		/* Передача методов внешнему компоненту */
-	}
+
 	useImperativeHandle(ref, () => ({
 		openModal,
 		closeModal,
@@ -99,6 +113,11 @@ ${isClosing ? modalStyles['modal__content--closing'] : ''}
 				</button>
 				<div className={modalStyles['modal__container']}>
 					<h2 className={modalStyles['container-title']}>{modalTitle}</h2>
+					{modalDeadline && (
+						<p
+							className={modalStyles['container-date']}
+						>{`${modalTextDeadline} ${formatDate(modalDeadline)}`}</p>
+					)}
 					{modalDate && (
 						<p
 							className={modalStyles['container-date']}

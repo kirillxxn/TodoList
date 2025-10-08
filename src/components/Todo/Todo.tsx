@@ -130,7 +130,9 @@ const Todo = () => {
 													modalRef.current?.openModal(
 														item.title,
 														item.completedAt || null,
-														item.createdAt
+														item.createdAt,
+														item.deadlineDate || null,
+														item.deadlineTime || null
 													)
 												}
 												aria-label='Открыть задачу'
@@ -155,7 +157,7 @@ const Todo = () => {
 															className={styles['container__deadline-word']}
 														>
 															{formatDateNoTime(item.deadlineDate)}
-															{item.deadlineTime && ` в ${item.deadlineTime}`}
+															{item.deadlineTime && ` / ${item.deadlineTime}`}
 														</span>
 													</p>
 												)}

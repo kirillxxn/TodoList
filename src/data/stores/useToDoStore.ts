@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { generateId } from '../GenId'
+import { generateId } from '../../utils/GenId'
 import { persist } from 'zustand/middleware'
 export type Task = {
 	id: string
@@ -7,16 +7,16 @@ export type Task = {
 	createdAt: Date
 	completed: boolean
 	completedAt?: Date | null
-	deadlineDate?: Date | string | null
-	deadlineTime?: Date | string | null
+	deadlineDate?: string | null
+	deadlineTime?: string | null
 }
 
 export type TTodoList = {
 	tasks: Task[]
 	addTodo: (
 		title: string,
-		deadlineDate?: Date | string | null,
-		deadlineTime?: Date | string | null
+		deadlineDate?: string | null,
+		deadlineTime?: string | null
 	) => void
 	removeTodo: (id: string) => void
 	toggleTodo: (id: string) => void
@@ -26,7 +26,11 @@ export const useToDoStore = create<TTodoList>()(
 	persist(
 		(set, get) => ({
 			tasks: [],
-			addTodo: (title, deadlineDate, deadlineTime) => {
+			addTodo: (
+				title: string,
+				deadlineDate?: string | null,
+				deadlineTime?: string | null
+			) => {
 				const { tasks } = get()
 				const formattedTitle =
 					title.trim().charAt(0).toUpperCase() +
