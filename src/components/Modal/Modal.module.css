@@ -201,14 +201,14 @@
 	}
 
 	.modal__deadline {
-		flex-direction: column;
-		gap: 8px;
+		flex-direction: row;
+		gap: 10px;
 		text-align: center;
 	}
 
 	.modal__date-info {
-		flex-direction: column;
-		gap: 8px;
+		flex-direction: row;
+		gap: 10px;
 		text-align: center;
 	}
 

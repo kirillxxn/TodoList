@@ -33,10 +33,11 @@
 
 .todo__section {
 	width: 70%;
-	min-height: 80vh;
+	height: 80vh;
 	border-radius: 20px;
 	background-color: #f1e3c2;
 	text-align: center;
+	overflow-x: hidden;
 }
 
 .todo__form {
@@ -108,9 +109,9 @@
 .todo__add-button {
 	background-color: #20383c;
 	border: none;
-	border-radius: 50px;
+	border-radius: 20px;
 	cursor: pointer;
-	padding: 5px;
+	padding: 5px 10px;
 	transition: opacity 0.3s ease-in-out;
 }
 
@@ -151,18 +152,16 @@
 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 	gap: 20px;
 	list-style: none;
-	padding: 10px;
 	margin: 0;
 }
 
 .todo__item {
 	position: relative;
-	padding: 15px 10px 10px;
+	padding: 20px 10px 10px;
 	border: 1px solid #20383c;
 	border-radius: 20px;
 	transition: transform 0.3s ease-in-out;
-	height: auto;
-	min-height: auto;
+	height: 140px;
 }
 
 .todo__item--active {
@@ -324,7 +323,7 @@
 /* Адаптивность */
 @media (max-width: 1200px) {
 	.todo__section {
-		width: 70%;
+		width: 90%;
 		height: 70vh;
 	}
 }
@@ -351,16 +350,15 @@
 
 	.todo__section {
 		width: 90%;
-		overflow-x: auto;
+		height: 80vh;
 	}
 
 	.todo__input-group {
 		width: 100%;
 	}
 
-	.todo__date-group {
-		flex-wrap: wrap;
-		justify-content: center;
+	.todo__date-input {
+		border-radius: 20px;
 	}
 
 	.todo__list {
@@ -397,7 +395,9 @@
 	}
 
 	.todo__item {
-		padding: 12px 8px 8px;
+		width: 40vh;
+		padding: 25px 8px 8px;
+		height: 160px;
 	}
 
 	.todo__item-content {
@@ -406,6 +406,6 @@
 
 	.todo__item:has(.todo__deadline:not(.todo__deadline--hidden))
 		.todo__item-content {
-		padding: 20px 5px 8px;
+		padding: 35px 5px 8px;
 	}
 }
