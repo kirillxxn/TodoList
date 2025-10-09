@@ -1,15 +1,18 @@
 import styles from './Todo.module.css'
 import '..//..//assets/fonts/fonts.css'
 import AddTodoIcon from '..//..//assets/icons/icon-add-todo.svg'
+import ReturnTodoIcon from '..//..//assets/icons/icon-return-todo.svg'
 import DeleteTodoIcon from '..//..//assets/icons/icon-delete-todo.svg'
 import DoneTodoIcon from '..//..//assets/icons/icon-done-todo.svg'
+import DeadlineIcon from '..//..//assets/icons/icon-deadline.svg'
+import DateAddTodoIcon from '..//..//assets/icons/icon-date-add-todo.svg'
 import { useToDoStore } from '../../data/stores/useToDoStore'
 import { useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 import Modal from '../Modal/Modal'
 import type { TModal } from '../Modal/TypeModal'
 import { toastConfig } from '../../utils/config/toast'
-import { formatDate, formatDateNoTime } from '../../utils/config/formatDate'
+import { formatDateNoTime, formatDateText } from '../../utils/config/formatDate'
 
 const Todo = () => {
 	/* Рефы */
@@ -118,11 +121,19 @@ const Todo = () => {
 											}`}
 											onClick={() => toggleTodo(item.id)}
 										>
-											<img
-												className={styles['btn__done-icon']}
-												src={DoneTodoIcon}
-												alt='Иконка выполненной задачи'
-											/>
+											{item.completed ? (
+												<img
+													className={styles['btn__done-icon']}
+													src={ReturnTodoIcon}
+													alt='Иконка выполненной задачи'
+												/>
+											) : (
+												<img
+													className={styles['btn__done-icon']}
+													src={DoneTodoIcon}
+													alt='Иконка выполненной задачи'
+												/>
+											)}
 										</button>
 										<div className={styles['todo__item-word-container']}>
 											<button
@@ -152,23 +163,36 @@ const Todo = () => {
 															styles[item.completed ? 'deadline-done' : '']
 														}`}
 													>
+														<img
+															src={DeadlineIcon}
+															className={styles['deadline-icon']}
+															alt=''
+														/>
 														Выполнить до: {''}
 														<span
 															className={styles['container__deadline-word']}
 														>
 															{formatDateNoTime(item.deadlineDate)}
-															{item.deadlineTime && ` / ${item.deadlineTime}`}
+															{item.deadlineTime && ` | ${item.deadlineTime}`}
 														</span>
 													</p>
 												)}
 												<p className={styles['word__container-date']}>
+													<img
+														src={DateAddTodoIcon}
+														className={styles['date-icon']}
+														alt=''
+													/>
+
 													{item.completed
 														? `Выполнено ${
 																item.completedAt
-																	? formatDate(item.completedAt)
+																	? formatDateText(item.completedAt)
 																	: ''
 														  }`
-														: `Дата добавления: ${formatDate(item.createdAt)}`}
+														: `Дата добавления: ${formatDateText(
+																item.createdAt
+														  )}`}
 												</p>
 											</button>
 										</div>

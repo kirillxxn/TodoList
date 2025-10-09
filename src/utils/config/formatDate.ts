@@ -17,6 +17,7 @@ export const formatDateText = (date: Date | null) => {
 		minute: '2-digit',
 	})
 }
+
 export const formatDateNoTime = (date: Date | string) => {
 	return new Date(date).toLocaleDateString('ru-RU', {
 		day: '2-digit',

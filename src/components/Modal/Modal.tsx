@@ -34,6 +34,7 @@ const Modal = forwardRef<TModal>((_, ref) => {
 			setIsClosing(false)
 		}, 300)
 		setModalTitle('')
+		setModalDeadline('')
 		setModalDate(null)
 	}
 	{

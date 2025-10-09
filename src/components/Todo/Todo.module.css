@@ -184,20 +184,38 @@
 .word-container-deadline {
 	font-size: 1rem;
 	color: black;
-	border-bottom: 1px black solid;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0;
 }
 .container__deadline-word {
-	font-style: italic;
-	color: rgb(121, 31, 31);
+	padding: 5px;
+	font-size: 0.8rem;
+	color: #f1e3c2;
+	border-radius: 20px;
+	background-color: rgb(121, 31, 31);
 }
 .deadline-done {
 	display: none;
 }
+.deadline-icon {
+	width: 24px;
+	height: 24px;
+}
+.date-icon {
+	width: 24px;
+	height: 24px;
+}
 .word__container-date {
 	margin: 0;
-	font-size: 0.9rem;
+	font-size: 0.8rem;
 	max-width: 100%;
 	font-style: italic;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	gap: 10px;
 }
 
 .item__btn {
