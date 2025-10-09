@@ -7,17 +7,22 @@ import DeadlineIcon from '../../assets/icons/icon-deadline.svg'
 import DateAddTodoIcon from '../../assets/icons/icon-date-add-todo.svg'
 import DateAddTodoIconDone from '../../assets/icons/icon-date-add-todo-done.svg'
 import { formatDateNoTime, formatDateText } from '../../utils/config/formatDate'
-
+import welcomeCache from '../../assets/icons/icon-cache.svg'
+import welcomeData from '../../assets/icons/icon-data.svg'
+import welcomeExport from '../../assets/icons/icon-export.svg'
+import welcomeSync from '../../assets/icons/icon-synchronization.svg'
+import welcomeLocal from '../../assets/icons/icon-local.svg'
 const Modal = forwardRef<TModal>((_, ref) => {
-	const [isClosing, setIsClosing] = useState(false)
-	const [isOpening, setIsOpening] = useState(false)
-	const [modalIsOpen, setModalIsOpen] = useState(false)
-	const [modalTitle, setModalTitle] = useState('')
+	const [welcomeModal, setWelcomeModal] = useState<boolean>(true)
+	const [isClosing, setIsClosing] = useState<boolean>(false)
+	const [isOpening, setIsOpening] = useState<boolean>(false)
+	const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
+	const [modalTitle, setModalTitle] = useState<string>('')
 	const [modalCompletedAt, setModalCompletedAt] = useState<Date | null>(null)
 	const [modalCreatedAt, setModalCreatedAt] = useState<Date | null>(null)
 	const [modalDeadlineDate, setModalDeadlineDate] = useState<string | null>('')
 	const [modalDeadlineTime, setModalDeadlineTime] = useState<string | null>('')
-	const [isCompleted, setIsCompleted] = useState(false)
+	const [isCompleted, setIsCompleted] = useState<boolean>(false)
 
 	useEffect(() => {
 		if (modalIsOpen) {
@@ -28,6 +33,17 @@ const Modal = forwardRef<TModal>((_, ref) => {
 		}
 	}, [modalIsOpen])
 
+	useEffect(() => {
+		const hasSeenWarning = localStorage.getItem('hasSeenTodoWarning')
+		if (!hasSeenWarning) {
+			const timer = setTimeout(() => {
+				openWelcomeModal()
+				localStorage.setItem('hasSeenTodoWarning', 'true')
+			}, 100)
+			return () => clearTimeout(timer)
+		}
+	}, [])
+
 	const closeModal = () => {
 		document.body.style.overflow = ''
 		setIsOpening(false)
@@ -35,6 +51,7 @@ const Modal = forwardRef<TModal>((_, ref) => {
 		setTimeout(() => {
 			setModalIsOpen(false)
 			setIsClosing(false)
+			setWelcomeModal(false)
 		}, 300)
 		setModalTitle('')
 		setModalDeadlineDate('')
@@ -68,7 +85,20 @@ const Modal = forwardRef<TModal>((_, ref) => {
 		setModalIsOpen(true)
 		setIsClosing(false)
 	}
-
+	const openWelcomeModal = () => {
+		setModalTitle('')
+		setModalDeadlineDate('')
+		setModalDeadlineTime('')
+		setModalCompletedAt(null)
+		setModalCreatedAt(null)
+		setIsCompleted(false)
+		setWelcomeModal(true)
+		setModalTitle('Важная информация')
+		setModalCreatedAt(null)
+		document.body.style.overflow = 'hidden'
+		setModalIsOpen(true)
+		setIsClosing(false)
+	}
 	useImperativeHandle(ref, () => ({
 		openModal,
 		closeModal,
@@ -76,7 +106,6 @@ const Modal = forwardRef<TModal>((_, ref) => {
 		isOpening,
 		modalIsOpen,
 	}))
-
 	return (
 		<>
 			<ReactModal
@@ -171,6 +200,57 @@ const Modal = forwardRef<TModal>((_, ref) => {
 							) : null}
 						</div>
 					</div>
+				</div>
+				<div className={modalStyles['welcome__modal-container']}>
+					{welcomeModal && (
+						<ul className={modalStyles['welcome__list']}>
+							<li className={modalStyles['welcome__item']}>
+								<img
+									className={modalStyles['welcome__icon']}
+									src={welcomeLocal}
+									alt='Иконка локального хранилища'
+								/>
+								Это локальное ToDo-приложение
+							</li>
+							<li className={modalStyles['welcome__item']}>
+								<img
+									className={modalStyles['welcome__icon']}
+									src={welcomeData}
+									alt='Иконка данных'
+								/>
+								Данные хранятся только в этом браузере
+							</li>
+							<li className={modalStyles['welcome__item']}>
+								<img
+									className={modalStyles['welcome__icon']}
+									src={welcomeSync}
+									alt='Иконка синхронизации'
+								/>
+								Не синхронизируются между устройствами
+							</li>
+							<li className={modalStyles['welcome__item']}>
+								<img
+									className={modalStyles['welcome__icon']}
+									src={welcomeCache}
+									alt='Иконка очистки истории браузера'
+								/>
+								Очистятся при удалении истории браузера
+							</li>
+							<li className={modalStyles['welcome__item']}>
+								<img
+									className={modalStyles['welcome__icon']}
+									src={welcomeExport}
+									alt='Иконка экспорта данных'
+								/>
+								Для постоянного хранения рекомендуем экспортировать задачи
+							</li>
+						</ul>
+					)}
+					<button onClick={closeModal} className={modalStyles['welcome__btn']}>
+						<span className={modalStyles['welcome__btn-text']}>
+							Я понял(а) спасибо
+						</span>
+					</button>
 				</div>
 			</ReactModal>
 		</>
