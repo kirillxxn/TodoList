@@ -122,7 +122,7 @@ ${isClosing ? modalStyles['modal__content--closing'] : ''}
 					{modalDate && (
 						<p
 							className={modalStyles['container-date']}
-						>{`${modalTextData} ${formatDateText(modalDate)}`}</p>
+						>{`${modalTextData}  ${formatDateText(modalDate)}`}</p>
 					)}
 				</div>
 			</ReactModal>

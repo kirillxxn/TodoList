@@ -7,7 +7,7 @@ export const formatDate = (date: string) => {
 		minute: '2-digit',
 	})
 }
-export const formatDateText = (date: Date | null) => {
+export const formatDateText = (date: Date | null | undefined) => {
 	if (!date) return ''
 	return new Date(date).toLocaleString('ru-RU', {
 		day: '2-digit',

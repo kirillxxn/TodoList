@@ -22,7 +22,7 @@
 }
 
 .modal__content {
-	background: #f1e3c2;
+	background-color: #e4e3df;
 	width: 50vh;
 	height: 35vh;
 	padding: 30px;
@@ -101,6 +101,7 @@
 }
 .container-date {
 	margin: 0;
+	background-color: #fff;
 }
 @media (max-width: 1200px) {
 	.modal__content {

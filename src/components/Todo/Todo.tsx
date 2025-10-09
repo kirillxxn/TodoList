@@ -1,11 +1,12 @@
 import styles from './Todo.module.css'
-import '..//..//assets/fonts/fonts.css'
-import AddTodoIcon from '..//..//assets/icons/icon-add-todo.svg'
-import ReturnTodoIcon from '..//..//assets/icons/icon-return-todo.svg'
-import DeleteTodoIcon from '..//..//assets/icons/icon-delete-todo.svg'
-import DoneTodoIcon from '..//..//assets/icons/icon-done-todo.svg'
-import DeadlineIcon from '..//..//assets/icons/icon-deadline.svg'
-import DateAddTodoIcon from '..//..//assets/icons/icon-date-add-todo.svg'
+import '../../assets/fonts/fonts.css'
+import AddTodoIcon from '../../assets/icons/icon-add-todo.svg'
+import ReturnTodoIcon from '../../assets/icons/icon-return-todo.svg'
+import DeleteTodoIcon from '../../assets/icons/icon-delete-todo.svg'
+import DoneTodoIcon from '../../assets/icons/icon-done-todo.svg'
+import DeadlineIcon from '../../assets/icons/icon-deadline.svg'
+import DateAddTodoIcon from '../../assets/icons/icon-date-add-todo.svg'
+import DateAddTodoIconDone from '../../assets/icons/icon-date-add-todo-done.svg'
 import { useToDoStore } from '../../data/stores/useToDoStore'
 import { useRef, useState } from 'react'
 import { toast } from 'react-toastify'
@@ -15,18 +16,13 @@ import { toastConfig } from '../../utils/config/toast'
 import { formatDateNoTime, formatDateText } from '../../utils/config/formatDate'
 
 const Todo = () => {
-	/* Рефы */
 	const modalRef = useRef<TModal>(null)
-
-	/* Store */
 	const { tasks, addTodo, removeTodo, toggleTodo } = useToDoStore()
 
-	/* Состояния */
 	const [inputValue, setInputValue] = useState('')
 	const [inputDateValue, setInputDateValue] = useState('')
 	const [inputTimeValue, setInputTimeValue] = useState('')
 
-	/* Функции Todo */
 	const handleAddTodo = () => {
 		if (inputValue.trim()) {
 			addTodo(inputValue, inputDateValue, inputTimeValue)
@@ -36,53 +32,62 @@ const Todo = () => {
 			toast.success('Добавлено', toastConfig)
 		}
 	}
+
 	const handleDeleteTodo = (id: string) => {
 		removeTodo(id)
 		toast.info('Удалено', toastConfig)
 	}
+
 	const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {
 			handleAddTodo()
 		}
 	}
 
-	/* Сортировка задач */
-	const sortTasks = tasks.sort((a, b) => {
+	const sortedTasks = tasks.sort((a, b) => {
 		if (a.completed === b.completed) {
 			return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
 		}
 		return a.completed ? 1 : -1
 	})
 
-	/* Контент */
 	return (
 		<>
-			<div className={styles['container']}>
-				<h1 className={styles['container-title']}>ToDo</h1>
-				<h2 className={styles['container-subtitle']}>list</h2>
-				<section className={styles['section-todolist']}>
-					<div className={styles['todolist-add-todo']}>
-						<div className={styles['add__todo-input-btn']}>
+			<div className={styles['todo']}>
+				<div className={styles['todo__header']}>
+					<h1 className={styles['todo__title']}>ToDo</h1>
+					<h2 className={styles['todo__subtitle']}>list</h2>
+				</div>
+
+				<section className={styles['todo__section']}>
+					<div className={styles['todo__form']}>
+						<div className={styles['todo__input-group']}>
 							<input
-								className={styles['todo-input']}
+								className={styles['todo__input']}
 								type='text'
 								placeholder='Add todo'
 								value={inputValue}
 								onChange={e => setInputValue(e.target.value)}
 								onKeyDown={handleEnterPress}
 							/>
-							<button onClick={handleAddTodo} className={styles['todo-button']}>
+							<button
+								onClick={handleAddTodo}
+								className={styles['todo__add-button']}
+							>
 								<img
-									className={styles['todo-button-icon']}
+									className={styles['todo__add-icon']}
 									src={AddTodoIcon}
-									alt='Иконка добавления задачи'
+									alt='Добавить задачу'
 								/>
 							</button>
 						</div>
-						<div className={styles['add__todo_date-container']}>
-							<label htmlFor='date'>Выполнить до:</label>
+
+						<div className={styles['todo__date-group']}>
+							<label htmlFor='date' className={styles['todo__label']}>
+								Выполнить до:
+							</label>
 							<input
-								className={styles['todo-input-date']}
+								className={styles['todo__date-input']}
 								type='date'
 								name='date'
 								value={inputDateValue}
@@ -90,52 +95,44 @@ const Todo = () => {
 								onChange={e => setInputDateValue(e.target.value)}
 							/>
 							<input
-								className={styles['todo-input-date']}
+								className={styles['todo__date-input']}
 								type='time'
 								value={inputTimeValue}
 								onChange={e => setInputTimeValue(e.target.value)}
 							/>
 						</div>
 					</div>
-					<div className={styles['todo']}>
+
+					<div className={styles['todo__content']}>
 						{tasks.length === 0 ? (
 							<div className={styles['todo__empty']}>
 								<span className={styles['todo__empty-text']}>Нет задач</span>
 							</div>
 						) : (
 							<ul className={styles['todo__list']}>
-								{sortTasks.map(item => (
+								{sortedTasks.map(item => (
 									<li
 										className={`${styles['todo__item']} ${
-											styles[item.completed ? 'completed' : 'uncompleted']
+											styles[
+												`todo__item--${item.completed ? 'completed' : 'active'}`
+											]
 										}`}
 										key={item.id}
 									>
 										<button
-											className={`${styles['item__btn']} ${
-												styles[
-													item.completed
-														? 'btn__done-completed'
-														: 'todo__item-btn-done'
-												]
-											}`}
+											className={`${styles['todo__action-button']} ${styles['todo__action-button--done']}`}
 											onClick={() => toggleTodo(item.id)}
 										>
-											{item.completed ? (
-												<img
-													className={styles['btn__done-icon']}
-													src={ReturnTodoIcon}
-													alt='Иконка выполненной задачи'
-												/>
-											) : (
-												<img
-													className={styles['btn__done-icon']}
-													src={DoneTodoIcon}
-													alt='Иконка выполненной задачи'
-												/>
-											)}
+											<img
+												className={styles['todo__action-icon']}
+												src={item.completed ? ReturnTodoIcon : DoneTodoIcon}
+												alt={
+													item.completed ? 'Вернуть задачу' : 'Выполнить задачу'
+												}
+											/>
 										</button>
-										<div className={styles['todo__item-word-container']}>
+
+										<div className={styles['todo__item-content']}>
 											<button
 												onClick={() =>
 													modalRef.current?.openModal(
@@ -147,63 +144,78 @@ const Todo = () => {
 													)
 												}
 												aria-label='Открыть задачу'
-												className={styles['word__container-btn-modal']}
+												className={styles['todo__content-button']}
 											>
 												<h3
-													title='Посмотреть полностью'
-													className={`${styles['word__container-title']} ${
-														styles[item.completed ? 'title-completed' : '']
+													className={`${styles['todo__item-title']} ${
+														item.completed
+															? styles['todo__item-title--completed']
+															: ''
 													}`}
 												>
 													{item.title}
 												</h3>
+
 												{item.deadlineDate && (
 													<p
-														className={`${styles['word-container-deadline']} ${
-															styles[item.completed ? 'deadline-done' : '']
+														className={`${styles['todo__deadline']} ${
+															item.completed
+																? styles['todo__deadline--hidden']
+																: ''
 														}`}
 													>
 														<img
 															src={DeadlineIcon}
-															className={styles['deadline-icon']}
-															alt=''
+															className={styles['todo__deadline-icon']}
+															alt='Дедлайн'
 														/>
 														Выполнить до: {''}
-														<span
-															className={styles['container__deadline-word']}
-														>
+														<span className={styles['todo__deadline-date']}>
 															{formatDateNoTime(item.deadlineDate)}
 															{item.deadlineTime && ` | ${item.deadlineTime}`}
 														</span>
 													</p>
 												)}
-												<p className={styles['word__container-date']}>
-													<img
-														src={DateAddTodoIcon}
-														className={styles['date-icon']}
-														alt=''
-													/>
 
-													{item.completed
-														? `Выполнено ${
-																item.completedAt
-																	? formatDateText(item.completedAt)
-																	: ''
-														  }`
-														: `Дата добавления: ${formatDateText(
-																item.createdAt
-														  )}`}
+												<p className={styles['todo__date-info']}>
+													{item.completed ? (
+														<>
+															<img
+																src={DateAddTodoIconDone}
+																className={styles['todo__date-icon']}
+																alt='Выполнено'
+															/>
+															<span
+																className={styles['todo__date-text--completed']}
+															>
+																Выполнено: {formatDateText(item.completedAt)}
+															</span>
+														</>
+													) : (
+														<>
+															<img
+																src={DateAddTodoIcon}
+																className={styles['todo__date-icon']}
+																alt='Добавлено'
+															/>
+															<span>
+																Дата добавления:{' '}
+																{formatDateText(item.createdAt)}
+															</span>
+														</>
+													)}
 												</p>
 											</button>
 										</div>
+
 										<button
-											className={`${styles['item__btn']} ${styles['todo__item-btn-delete']}`}
+											className={`${styles['todo__action-button']} ${styles['todo__action-button--delete']}`}
 											onClick={() => handleDeleteTodo(item.id)}
 										>
 											<img
-												className={styles['btn__delete-icon']}
+												className={styles['todo__action-icon']}
 												src={DeleteTodoIcon}
-												alt='Иконка удаления задачи'
+												alt='Удалить задачу'
 											/>
 										</button>
 									</li>
@@ -217,4 +229,5 @@ const Todo = () => {
 		</>
 	)
 }
+
 export default Todo
