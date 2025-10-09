@@ -157,11 +157,12 @@
 
 .todo__item {
 	position: relative;
-	min-height: 150px;
-	padding: 10px;
+	padding: 15px 10px 10px;
 	border: 1px solid #20383c;
 	border-radius: 20px;
 	transition: transform 0.3s ease-in-out;
+	height: auto;
+	min-height: auto;
 }
 
 .todo__item--active {
@@ -180,9 +181,9 @@
 
 .todo__item-content {
 	display: flex;
-	padding: 40px 10px 20px;
 	align-items: center;
 	flex-wrap: nowrap;
+	padding: 25px 5px 5px;
 }
 
 .todo__content-button {
@@ -190,13 +191,14 @@
 	border: none;
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 8px;
 	cursor: pointer;
 	width: 100%;
 	color: inherit;
 	align-items: center;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	padding: 0;
 }
 
 .todo__item-title {
@@ -308,6 +310,17 @@
 	background-color: rgba(32, 56, 60, 0.9);
 }
 
+/* Стили для карточек с дедлайном */
+.todo__item:has(.todo__deadline:not(.todo__deadline--hidden))
+	.todo__item-content {
+	padding: 25px 5px 10px;
+}
+
+.todo__item:has(.todo__deadline:not(.todo__deadline--hidden))
+	.todo__content-button {
+	gap: 12px;
+}
+
 /* Адаптивность */
 @media (max-width: 1200px) {
 	.todo__section {
@@ -349,6 +362,11 @@
 		flex-wrap: wrap;
 		justify-content: center;
 	}
+
+	.todo__list {
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: 15px;
+	}
 }
 
 @media (max-width: 480px) {
@@ -376,5 +394,18 @@
 
 	.todo__date-group {
 		gap: 8px;
+	}
+
+	.todo__item {
+		padding: 12px 8px 8px;
+	}
+
+	.todo__item-content {
+		padding: 20px 5px 5px;
+	}
+
+	.todo__item:has(.todo__deadline:not(.todo__deadline--hidden))
+		.todo__item-content {
+		padding: 20px 5px 8px;
 	}
 }
