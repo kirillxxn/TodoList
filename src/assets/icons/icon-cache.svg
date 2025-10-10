@@ -1,28 +1,1 @@
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 48 48" id="b" xmlns="http://www.w3.org/2000/svg" fill="#000000">
-<g id="SVGRepo_bgCarrier" stroke-width="0"/>
-<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-<g id="SVGRepo_iconCarrier">
-<defs>
-<style>.t{fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;}</style>
-</defs>
-<circle id="c" class="t" cx="36.096" cy="22.6536" r="1.3931"/>
-<circle id="d" class="t" cx="40.2225" cy="26.8135" r="1.6717"/>
-<path id="e" class="t" d="m12.2134,10.4649l11.3032,1.9794"/>
-<path id="f" class="t" d="m15.5471,14.4757l7.3445,1.3022"/>
-<path id="g" class="t" d="m13.4115,17.3406l8.9592,1.5627"/>
-<path id="h" class="t" d="m28.9503,31.9961l-.2768-3.4044c-.6946-4.6049-6.0126-5.7231-7.657-1.2762-1.8215,3.7646-8.3136,7.2818-15.4182,8.1518,2.8623,9.2457,18.1701,7.426,20.2625,4.7401"/>
-<path id="i" class="t" d="m26.9545,34.7903c-4.9816,2.8272-.2458,7.5687,2.6044,5.7297,2.0714,2.7765,6.4689,2.2491,7.5008.1563,5.8857,2.6255,7.2368-5.5731,2.3961-6.3027-1.076-3.7607-4.9677-4.4122-7.2924-2.1356-1.9877-.4898-4.0291-1.2665-5.2089,2.5524Z"/>
-<path id="j" class="t" d="m9.2965,17.4072v1.5105"/>
-<path id="k" class="t" d="m9.2965,21.2702v1.5106"/>
-<path id="l" class="t" d="m10.5248,20.094l1.5105.0522"/>
-<path id="m" class="t" d="m6.6618,20.1461h1.5106"/>
-<path id="n" class="t" d="m14.0712,27.9419l1.0313,1.105m0-3.8734l-1.0682,1.0681m-2.7315-.9945l1.0681,1.0681m0,1.5898l-1.0681,1.0682"/>
-<path id="o" class="t" d="m21.0164,27.3156c2.3279,1.9405,4.9381,1.9753,7.657,1.2762"/>
-<path id="p" class="t" d="m10.9776,41.135c5.6948-1.9298,9.2192-4.403,11.1848-7.2823"/>
-<path id="q" class="t" d="m22.1103,38.4886c-1.116,1.5442-2.4716,2.8254-4.7661,3.8785"/>
-<path id="r" class="t" d="m7.1015,38.3102c3.2416-.0909,5.7762-1.2165,8.2373-2.4782"/>
-<path id="s" class="t" d="m23.712,24.6163l3.2165-17.1726c.448-2.9721,3.9476-2.1183,3.2685.573l-3.3643,17.2741"/>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" id="b" width="800" height="800" fill="#000" viewBox="0 0 48 48"><g id="SVGRepo_iconCarrier"><defs><style>.t{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round}</style></defs><circle id="c" cx="36.096" cy="22.654" r="1.393" class="t"/><circle id="d" cx="40.222" cy="26.814" r="1.672" class="t"/><path id="e" d="m12.213 10.465 11.304 1.98" class="t"/><path id="f" d="m15.547 14.476 7.345 1.302" class="t"/><path id="g" d="m13.412 17.34 8.959 1.563" class="t"/><path id="h" d="m28.95 31.996-.277-3.404c-.694-4.605-6.012-5.723-7.657-1.276-1.821 3.764-8.313 7.281-15.418 8.151 2.863 9.246 18.17 7.426 20.263 4.74" class="t"/><path id="i" d="M26.955 34.79c-4.982 2.828-.246 7.569 2.604 5.73 2.071 2.777 6.469 2.25 7.5.156 5.886 2.626 7.238-5.573 2.397-6.302-1.076-3.761-4.968-4.413-7.293-2.136-1.987-.49-4.029-1.266-5.209 2.552" class="t"/><path id="j" d="M9.297 17.407v1.51" class="t"/><path id="k" d="M9.297 21.27v1.51" class="t"/><path id="l" d="m10.525 20.094 1.51.052" class="t"/><path id="m" d="M6.662 20.146h1.51" class="t"/><path id="n" d="m14.071 27.942 1.031 1.105m0-3.873-1.068 1.068m-2.731-.995 1.068 1.068m0 1.59-1.068 1.068" class="t"/><path id="o" d="M21.016 27.316c2.328 1.94 4.939 1.975 7.657 1.276" class="t"/><path id="p" d="M10.978 41.135c5.694-1.93 9.219-4.403 11.184-7.282" class="t"/><path id="q" d="M22.11 38.489c-1.116 1.544-2.471 2.825-4.766 3.878" class="t"/><path id="r" d="M7.102 38.31c3.241-.09 5.776-1.216 8.237-2.478" class="t"/><path id="s" d="m23.712 24.616 3.217-17.172c.448-2.972 3.947-2.119 3.268.573L26.833 25.29" class="t"/></g></svg>

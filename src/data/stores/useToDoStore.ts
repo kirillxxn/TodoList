@@ -33,8 +33,7 @@ export const useToDoStore = create<TTodoList>()(
 			) => {
 				const { tasks } = get()
 				const formattedTitle =
-					title.trim().charAt(0).toUpperCase() +
-					title.trim().slice(1).toLowerCase()
+					title.trim().charAt(0).toUpperCase() + title.trim().slice(1)
 
 				const newTask: Task = {
 					id: generateId(),
