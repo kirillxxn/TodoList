@@ -201,8 +201,9 @@ const Modal = forwardRef<TModal>((_, ref) => {
 						</div>
 					</div>
 				</div>
-				<div className={modalStyles['welcome__modal-container']}>
-					{welcomeModal && (
+
+				{welcomeModal && (
+					<div className={modalStyles['welcome__modal-container']}>
 						<ul className={modalStyles['welcome__list']}>
 							<li className={modalStyles['welcome__item']}>
 								<img
@@ -245,13 +246,16 @@ const Modal = forwardRef<TModal>((_, ref) => {
 								Для постоянного хранения рекомендуем экспортировать задачи
 							</li>
 						</ul>
-					)}
-					<button onClick={closeModal} className={modalStyles['welcome__btn']}>
-						<span className={modalStyles['welcome__btn-text']}>
-							Я понял(а) спасибо
-						</span>
-					</button>
-				</div>
+						<button
+							onClick={closeModal}
+							className={modalStyles['welcome__btn']}
+						>
+							<span className={modalStyles['welcome__btn-text']}>
+								Я понял(а) спасибо
+							</span>
+						</button>
+					</div>
+				)}
 			</ReactModal>
 		</>
 	)
