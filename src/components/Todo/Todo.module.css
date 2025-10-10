@@ -187,6 +187,8 @@
 	align-items: center;
 	flex-wrap: nowrap;
 	padding: 25px 5px 5px;
+	width: 100%;
+	min-width: 0;
 }
 
 .todo__content-button {
@@ -202,6 +204,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	padding: 0;
+	min-width: 0;
 }
 
 .todo__item-title {
@@ -211,6 +214,9 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	max-width: 100%;
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 .todo__item-title--completed {
@@ -399,13 +405,29 @@
 	}
 
 	.todo__item {
-		width: 100%;
+		max-width: 100%;
 		padding: 0px;
 		height: 160px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	.todo__item-title {
+		padding: 0 20px;
+		margin-top: 10px;
+		display: block;
+		width: 100%;
+		max-width: 100%;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		min-width: 0;
+	}
+	x .todo__content-button {
+		min-width: 0;
 	}
 
 	.todo__item-content {
-		padding: 20px 5px 5px;
+		min-width: 0;
 	}
 
 	.todo__item:has(.todo__deadline:not(.todo__deadline--hidden))
