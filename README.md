@@ -1,73 +1,102 @@
-# React + TypeScript + Vite
+# TodoList ✅
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**TodoList** - это  веб-приложение для управления задачами, сочетающее в себе минималистичный дизайн и мощный функционал. Приложение помогает эффективно организовывать ежедневные задачи с установкой дедлайнов и отслеживанием прогресса.
 
-Currently, two official plugins are available:
+***
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Демо: https://kirillxxn.github.io/TodoList/
 
-## React Compiler
+***
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Возможности
 
-## Expanding the ESLint configuration
+- ✅ Создание, редактирование и удаление задач
+- ⏰ Установка дедлайнов с датой и временем выполнения
+- 🎯 Отслеживание статуса выполнения задач
+- 🔄 Автоматическое сохранение данных между сессиями
+- 📱 Полностью адаптивный интерфейс для всех устройств
+- 🎨 Плавные анимации и интуитивный UX
+- 🔍 Быстрый просмотр деталей задачи в модальном окне
+  
+***
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Технологии
+<p align="left">
+<a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg" width="36" height="36" alt="TypeScript" title="TypeScript"/></a>
+<a href="https://zustand-demo.pmnd.rs/" target="_blank" rel="noreferrer"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpHj4UwTW4ANSlNjzQOiiOqfDa6kal9RpF0A&s" width="36" height="36" alt="Zustand" title="Zustand"/></a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/javascript-colored.svg" width="36" height="36" alt="JavaScript" title="JavaScript"/></a>
+<a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg" width="36" height="36" alt="HTML5" title="HTML5"/></a>
+<a href="https://reactjs.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg" width="36" height="36" alt="React" title="React"/></a>
+<a href="https://www.w3.org/TR/CSS/#css" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/css3-colored.svg" width="36" height="36" alt="CSS3" title="CSS3"/></a>
+<a href="https://vitejs.dev/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/vite-colored.svg" width="36" height="36" alt="Vite" title="Vite"/></a>
+<a href="https://github.com/css-modules/css-modules" target="_blank" rel="noreferrer"><img src="https://i.redd.it/3vr72d9jitw21.png" width="36" height="36" alt="CSS Modules" title="CSS Modules"/></a>
+</p>
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+***
+## 📦 Установка и запуск
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Следуйте этим шагам, чтобы запустить проект локально:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. **Клонируйте репозиторий:**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+   ```bash
+   git clone https://github.com/kirillxxn/TodoList.git
+   cd TodoList
+   ```
+2. **Установите зависимости:**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+   ```bash
+    npm i
+   ```
+3. **Запустите проект в режиме разработки:**
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+   ```bash
+    npm run dev
+   ```
+4. **Откройте приложение в браузере:**
+
+   ```Перейдите по адресу:
+    http://localhost:5173
+   ```
+***
+
+## 📸 Пример работы проекта
+  <div align="center">
+  <img height="100%" width="100%" src="./demoproject/demoproject1.png"/>
+  
+<hr> 
+
+  <img height="100%" width="100%" src="./demoproject/demoproject2.png"/>
+
+<hr>
+
+  <img height="100%" width="100%" src="./demoproject/demoproject3.png"/>
+  
+<hr> 
+
+  <img height="100%" width="100%" src="./demoproject/demoproject4.png"/>
+
+<hr>
+
+  <img height="100%" width="100%" src="./demoproject/demoproject5.png"/>
+  
+
+</div>
+
+***
+
+### 👨‍💻 Разработчик
+
+Илья - kirillxxn
+
+***
+
+### 📄 Лицензия
+
+Этот проект является открытым и распространяется под лицензией MIT.
+
+***
+
+
+### ⭐ Не забудьте поставить звезду репозиторию, если вам понравился проект!
+
